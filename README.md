@@ -1,10 +1,10 @@
-Barbaric-Surreal-Bulldozer
+Barbaric Surreal Bulldozer
 ==========================
 
 Building
 --------
 
-> $ mkdir build
-> $ cmake ..
-> $ make
+$ mkdir build
+$ cmake ..
+$ make
 

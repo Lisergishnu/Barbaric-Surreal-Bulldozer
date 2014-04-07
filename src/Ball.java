@@ -45,4 +45,8 @@ public class Ball extends PhysicsElement {
    public String getDescription() {
    // to be coded by you
    }
+
+   public String getState() {
+    // programar
+   }
 }
