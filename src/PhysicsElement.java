@@ -7,6 +7,10 @@ public abstract class PhysicsElement {
    protected int getId() {
       return myId;
    }
+   //Extraidos desde la clase derivada
+   public abstract void computeNextState(double delta_t, MyWorld world);
+   public abstract void updateState();
+
    public abstract String getDescription();
    public abstract String getState();
 }

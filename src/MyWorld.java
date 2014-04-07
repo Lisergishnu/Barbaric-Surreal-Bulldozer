@@ -35,9 +35,9 @@ public class MyWorld {
       printState(t);
       while (t<endTime) {
          for(double nextStop=t+samplingTime; t<nextStop; t+=delta_t) {
-           for (PhysicsElement e: elements)   // compute each element next state based on current global state  
+           for (PhysicsElement e : elements)   // compute each element next state based on current global state  
               e.computeNextState(delta_t,this); // compute each element next state based on current global state
-           for (PhysicsElement e: elements)  // for each element update its state. 
+           for (PhysicsElement e : elements)  // for each element update its state. 
               e.updateState();     // update its state
          }
          printState(t);
