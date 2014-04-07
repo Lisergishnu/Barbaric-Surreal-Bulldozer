@@ -1,8 +1,7 @@
 
 SRC=src/*.java
 JC=javac
-NAME=Tarea1
-
+NAME=PhysicsLab
 all: 
 	$(JC) $(SRC)
 
