@@ -46,5 +46,7 @@ public class MyWorld {
 
    public Ball findCollidingBall(Ball me) {
       // to be coded by you
+      // TODO: esta funcion todavia no hace nada...
+      return me;
    }  
 } 

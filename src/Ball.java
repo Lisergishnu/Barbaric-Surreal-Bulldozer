@@ -17,6 +17,7 @@ public class Ball extends PhysicsElement {
       this.mass = mass;
       pos_t = position;
       speed_t = speed;
+      this.radius = radius;
    }
    public double getRadius() {
       return radius;
@@ -25,7 +26,7 @@ public class Ball extends PhysicsElement {
       return speed_t;
    }
    public double getMass() {
-    return mass;
+      return mass;
    }
    public void computeNextState(double delta_t, MyWorld world) {
      Ball b;  // Assumption: on collision we only change speed.   
@@ -39,6 +40,7 @@ public class Ball extends PhysicsElement {
    }
    public boolean collide(Ball b) {
    // to be coded by you
+      return false;
     }
    public void updateState(){
      pos_t = pos_tPlusDelta;
@@ -47,9 +49,11 @@ public class Ball extends PhysicsElement {
    
    public String getDescription() {
    // to be coded by you
+    return "";
    }
 
    public String getState() {
     // programar
+    return "";
    }
 }
