@@ -1,10 +1,7 @@
 Barbaric Surreal Bulldozer
 ==========================
 
-Building
---------
+Building and Running
+--------------------
 
-$ mkdir build
-$ cmake ..
-$ make
-
+> $ make && make run
