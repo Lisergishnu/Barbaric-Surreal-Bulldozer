@@ -24,6 +24,9 @@ public class Ball extends PhysicsElement {
    public double getSpeed() {
       return speed_t;
    }
+   public double getMass() {
+    return mass;
+   }
    public void computeNextState(double delta_t, MyWorld world) {
      Ball b;  // Assumption: on collision we only change speed.   
      if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */
