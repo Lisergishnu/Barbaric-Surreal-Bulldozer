@@ -28,6 +28,10 @@ public class Ball extends PhysicsElement {
    public double getMass() {
       return mass;
    }
+
+   public double getPos() {
+      return pos_t;
+   }
    public void computeNextState(double delta_t, MyWorld world) {
      Ball b;  // Assumption: on collision we only change speed.   
      if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */
@@ -48,12 +52,12 @@ public class Ball extends PhysicsElement {
    }
    
    public String getDescription() {
-   // to be coded by you
-    return "";
+	//Returns name pos \t name spd
+    return "ball" + id + " pos\tball" + id + " spd";
    }
 
    public String getState() {
-    // programar
-    return "";
+	   //returns current position and speed
+    return pos_t + "\t" + speed_t;
    }
 }
