@@ -1,4 +1,3 @@
-
 SRC=src/*.java
 JC=javac
 NAME=PhysicsLab

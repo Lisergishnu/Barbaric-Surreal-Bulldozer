@@ -36,7 +36,17 @@ public class PhysicsLab {
         System.exit(-1);
       }
       
-      PrintStream writer = new PrintStream(new File("res/output.txt"));
+      File outputFile = new File("res/output.txt");
+      if (!outputFile.exists()) {
+        try {
+          outputFile.getParentFile().mkdirs(); //Crear Directorio
+          outputFile.createNewFile();
+        } catch (IOException e) {
+          System.err.println("Couldn't make file: " + e.getMessage());
+          return; //Terminar programa
+        }
+      }
+      PrintStream writer = new PrintStream(outputFile);
       
       //MyWorld world = new MyWorld(writer);
       MyWorld world = new MyWorld(System.out);
