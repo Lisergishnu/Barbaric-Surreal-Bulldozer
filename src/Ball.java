@@ -28,9 +28,13 @@ public class Ball extends PhysicsElement {
    public double getMass() {
       return mass;
    }
+
+   public double getPos() {
+      return pos_t;
+   }
    public void computeNextState(double delta_t, MyWorld world) {
      Ball b;  // Assumption: on collision we only change speed.   
-     if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */
+     if ((b=world.findCollidingBall(this))!= null){ // elastic collision 
         speed_tPlusDelta=(speed_t*(mass-b.getMass())+2*b.getMass()*b.getSpeed())/(mass+b.getMass());
         pos_tPlusDelta = pos_t;
      } else {
@@ -39,7 +43,7 @@ public class Ball extends PhysicsElement {
      }
    }
    public boolean collide(Ball b) {
-   // to be coded by you
+      //Yuyo test comment
       return false;
     }
    public void updateState(){
@@ -48,12 +52,12 @@ public class Ball extends PhysicsElement {
    }
    
    public String getDescription() {
-   // to be coded by you
-    return "";
+	//Returns name pos \t name spd
+    return "b" + getId() + " pos\tb" + getId() + " spd";
    }
 
    public String getState() {
-    // programar
-    return "";
+	   //returns current position and speed
+    return pos_t + "\t" + speed_t;
    }
 }
