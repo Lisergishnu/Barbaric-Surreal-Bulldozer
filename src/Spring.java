@@ -1,51 +1,96 @@
 public class Spring extends PhysicsElement {
-   private static int id=0;  // Spring identification
-   protected final double restLength;
-   private final double stiffness;
-   protected Ball a_end, b_end;
+    //***********
+    // VARIABLES
+    //***********
+    private static int id=0;
+    private final double stiffness;
+    
+    protected final double restLength;
+    protected Ball a_end, b_end;
 
-   private Spring(){   // nobody can create a block without state
-      this(0,0);
-   }
-   public Spring(double restLength, double stiffness){
-      super(id++);
-      this.restLength = restLength;
-      this.stiffness = stiffness;
-      a_end = b_end = null;
-   }
-   public void attachEnd (Ball sa) {  // note: we attach a spring to a ball, 
-      if(a_end==null)                             //       not the other way around.
-         a_end = sa;                     
-     // to be completed by you
-      sa.attachSpring(this);
-   }
-   private double getAendPosition() {
-      if (a_end != null)
-         return a_end.getPosition();
-      if (b_end != null)
-         return b_end.getPosition()-restLength;
-      return 0;
-   }
-   public double getBendPosition() {
-    // to be coded by you
-   }
-   public double getForce(Ball ball) {
-      double force = 0;
-      if ((a_end == null) || (b_end == null))
-         return force;
-      if ((ball != a_end) && (ball != b_end))
-         return force;
-      // to be completed by you
-   }
-   public void computeNextState(double delta_t, MyWorld w){
-   } 
-   public void updateState(){
-   }
+    public Vector a_force;
+    public Vector b_force;
 
-   public String getDescription() {
-      return "Spring_"+ getId()+":a_end\tb_end";
-   }
-   public String getState() {
-     //  to be coded by you
-   }
+    {
+        a_end = b_end = null;
+        a_force = new Vector(6,6,6);
+        b_force = new Vector(6,6,6);
+    }
+    //**************
+    // CONSTRUCTORES
+    //**************
+    private Spring() {  // nobody can create a block without state
+        this(0,0);
+    }
+    
+    public Spring(double restLength, double stiffness) {
+        super(id++);
+        this.restLength = restLength;
+        this.stiffness = stiffness;
+    }
+    
+    //*************************
+    // METODOS PRIVADOS
+    //*************************
+    
+
+    //*************************
+    // METODOS PUBLICOS
+    //*************************
+    public void attachEnd (Ball sa) {
+    	/*TODO: addExternalForce() esta pasando el valor, no el puntero*/
+        if(a_end == null){
+            a_end = sa;
+            a_end.addExternalForce(a_force);
+        }
+        else if (b_end == null){
+        	b_end = sa;
+        	b_end.addExternalForce(b_force);
+        }
+        else
+        	System.out.println("Resorte lleno");
+        
+        sa.attachSpring(this);
+    }
+    
+    private Vector getAendPosition() {
+    	if (a_end != null)
+            return a_end.getPos();
+    	else if (b_end != null)
+            return b_end.getPos().add(restLength);
+    	else
+    		return Vector.zero();
+    }
+    
+    public Vector getBendPosition() {
+    	if (b_end != null)
+            return b_end.getPos();
+    	else if (a_end != null)
+            return a_end.getPos().add(restLength);
+    	else
+    		return Vector.zero();
+    }
+    
+    public Vector getForce() {
+        Vector force = new Vector();
+        if ((a_end == null) && (b_end == null))
+            return force;
+        else
+        	return force;
+    }    
+    
+    public void computeNextState(double delta_t, MyWorld w) {
+    }
+    public void updateState() {
+    	position = Vector.add(getAendPosition() , getBendPosition()).times(0.5);
+    	a_force = Vector.sub(getAendPosition(), getBendPosition()).dir().times((restLength - Vector.sub(getAendPosition(), getBendPosition()).module())*stiffness);
+    	b_force = Vector.sub(getBendPosition(), getAendPosition()).dir().times((restLength - Vector.sub(getAendPosition(), getBendPosition()).module())*stiffness);
+    }
+
+    public String getDescription() {
+        return "S"+ getId()+"a\tS" + getId() + "b\tS"+ getId() + "aF\tS"+ getId() + "bF";
+    }
+    public String getState() {
+    	return df.format(getAendPosition().x) + "\t" + df.format(getBendPosition().x) + "\t" + df.format(a_force.x) + "\t" + df.format(b_force.x);
+    }
 }
