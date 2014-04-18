@@ -12,7 +12,8 @@ public class Spring extends PhysicsElement {
     public Vector b_force;
 
     {
-        a_end = b_end = null;
+        a_end = null;
+        b_end = null;
         a_force = new Vector(6,6,6);
         b_force = new Vector(6,6,6);
     }
@@ -47,8 +48,10 @@ public class Spring extends PhysicsElement {
         	b_end = sa;
         	b_end.addExternalForce(b_force);
         }
-        else
+        else{
         	System.out.println("Resorte lleno");
+        	return;
+        }
         
         sa.attachSpring(this);
     }
