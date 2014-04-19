@@ -4,19 +4,21 @@ import java.text.*;
 public abstract class PhysicsElement {
     private final int myId;
 
-    protected DecimalFormat df = new DecimalFormat("#.##");
-    
+    // Variables Fisicas
     protected Vector position;
     protected Vector externalForce;
     protected ArrayList<Vector> externalForces;
-    
+
+    // Objetos Asociados
+    protected Spring attachedSpring;
     {
-        /*Inicialización de Variables*/
-        position = new Vector();
-        externalForce = new Vector();
-        // externalForce es la suma de todas las externalForces
-        externalForces = new ArrayList<Vector>();
+        attachedSpring = null;
+	    externalForce = new Vector();
+	    // externalForce es la suma de todas las externalForces
+	    externalForces = new ArrayList<Vector>();
     }
+    
+    protected DecimalFormat df = new DecimalFormat("#.##");
     
     protected PhysicsElement( int id) {
         myId = id;
@@ -30,11 +32,20 @@ public abstract class PhysicsElement {
 
     public abstract String getDescription();
     public abstract String getState();
-    
+
+    public Vector getPos() {
+        return position;
+    }
+
     public void addExternalForce(Vector extF) {
         externalForces.add(extF);
     }
+    
     public void removeExternalForce(Vector extF) {
         externalForces.remove(extF);
+    }
+
+    public void attachSpring(Spring spring) {
+        attachedSpring = spring;
     }
 }

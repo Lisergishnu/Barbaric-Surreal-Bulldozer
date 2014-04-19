@@ -9,23 +9,19 @@ public class Ball extends PhysicsElement {
     private final double radius;
     private double delta;
 
-    //Objetos Asociados
-    private Spring attachedSpring;
-
     //Variables Fisicas
     private Vector internalForce;
     private Vector acceleration;
     private Vector speed;
     private Vector next_speed;
     private Vector next_position;
-
     
     private boolean collision;
 
     {
         /*Inicialización de Variables*/
+        position = new Vector();
         internalForce = new Vector();
-        attachedSpring = null;
         acceleration = new Vector();
         speed = new Vector();
         next_speed = new Vector();
@@ -53,8 +49,9 @@ public class Ball extends PhysicsElement {
     private void updateForces() {
         internalForce.x = 0;
         externalForce.zerify();
+        //externalForce = attachedSpring.a_force;
         for(Vector x : externalForces) {
-            externalForce = Vector.add(x, externalForce);
+            externalForce.add(x);
         }
     }
 
@@ -73,10 +70,6 @@ public class Ball extends PhysicsElement {
         return speed;
     }
 
-    public Vector getPos() {
-        return position;
-    }
-
     public Vector getNextPos() {
         return Vector.add(position, speed.times(delta));
     }
@@ -87,10 +80,6 @@ public class Ball extends PhysicsElement {
 
     public String getDescription() {
         return "b" + getId() + "pos\tb" + getId() + "spd\t" + "eF";
-    }
-
-    public void attachSpring(Spring spring) {
-        attachedSpring = spring;
     }
     
     public void computeNextState(double delta_t, MyWorld world) {
