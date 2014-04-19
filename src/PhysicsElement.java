@@ -13,4 +13,5 @@ public abstract class PhysicsElement {
 
    public abstract String getDescription();
    public abstract String getState();
+   public abstract double getPosition();
 }
