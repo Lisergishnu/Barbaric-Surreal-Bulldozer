@@ -37,23 +37,30 @@ public class Ball extends PhysicsElement {
      Ball b;  // Assumption: on collision we only change speed.   
      if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */
         speed_tPlusDelta=(speed_t*(mass-b.getMass())+2*b.getMass()*b.getSpeed())/(mass+b.getMass());
-        pos_tPlusDelta = pos_t;
+        pos_tPlusDelta = pos_t+ speed_tPlusDelta*delta_t;
      } else {
         speed_tPlusDelta = speed_t;
         pos_tPlusDelta = pos_t + speed_t*delta_t;
      }
    }
-   public boolean collide(Ball b) {
-   // to be coded by you
-      return false;
+   public boolean collide(Ball b) {//revisar
+	  /* boolean FrontCollision;
+	   boolean BackCollision;
+	   FrontCollision = (pos_t+radius)==(b.getPosition()-b.getRadius());
+	   BackCollision = (pos_t-radius)==(b.getPosition()+b.getRadius());
+	   if(FrontCollision||BackCollision)
+		   return true;
+	   else*/
+		   return false;
     }
+   
    public void updateState(){
      pos_t = pos_tPlusDelta;
      speed_t = speed_tPlusDelta;
    }
    
    public String getDescription() {
-    return ("Bola Nr."+id);
+    return ("Bola Nr."+getId());
    }
 
    public String getState() {

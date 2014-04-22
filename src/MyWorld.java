@@ -48,8 +48,51 @@ public class MyWorld {
    }   
 
    public Ball findCollidingBall(Ball me) {
-      // to be coded by you
-      // TODO: esta funcion todavia no hace nada...
-      return me;
+	   
+		double myFrontCollisionPosition = me.getPosition() + me.getRadius();
+		double myBackCollisionPosition = me.getPosition() - me.getRadius();
+
+		for(PhysicsElement e: elements){
+		if ((!(e instanceof Ball )) && (me.equals(e)) )
+		continue;
+
+		double yourFrontCollisionPosition = ((Ball) e).getPosition() + ((Ball) e).getRadius();
+		double yourBackCollisionPosition = ((Ball) e).getPosition() - ((Ball) e).getRadius();
+
+		boolean frontCollision = (yourBackCollisionPosition - myFrontCollisionPosition) < 0 &&
+		(yourBackCollisionPosition - myFrontCollisionPosition)>=-me.getRadius() ;
+
+		boolean backCollision = (myBackCollisionPosition - yourFrontCollisionPosition) < 0 &&
+		(myBackCollisionPosition - yourFrontCollisionPosition)>=-me.getRadius() ;
+
+		if (frontCollision || backCollision){
+		return (Ball) e;
+		}
+		}
+		      // to be coded by you
+		return null;
+	   
+	   /*boolean FrontCollision;
+	   boolean BackCollision;
+	   for (PhysicsElement e:elements){
+		   if ((e instanceof Ball)  && (!(me.equals(e))) ){
+			   FrontCollision = (	(me.getPosition() + me.getRadius()) >= (e.getPosition() - ((Ball) e).getRadius())	);
+			   BackCollision  = (	(me.getPosition() - me.getRadius()) <= (e.getPosition() + ((Ball) e).getRadius())	);
+			   
+			   if(me.getPosition()<e.getPosition()){
+				   if(FrontCollision)
+					   return me;
+				   else
+					   continue;
+			   }
+			   else if(me.getPosition()>e.getPosition()){
+				   if(BackCollision)
+					   return me;
+				   else
+					   continue;
+			   }
+		   }
+	   }
+	   return null;*/
    }  
 } 
