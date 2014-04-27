@@ -1,4 +1,4 @@
-public class FixedHook extends PhysicsElement{
+public class FixedHook extends PhysicsElement implements SpringAttachable{
     //***********
     // VARIABLES
     //***********
@@ -43,4 +43,9 @@ public class FixedHook extends PhysicsElement{
 	public Vector getPos() {
 	    return position;
 	}
+	
+	public void attachSpring(Spring s){
+		//insertar codigo
+	}
+	
 }

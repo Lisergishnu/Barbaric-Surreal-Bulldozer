@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Ball extends PhysicsElement {
+public class Ball extends PhysicsElement implements SpringAttachable{
     //***********
     // VARIABLES
     //***********
@@ -103,4 +103,13 @@ public class Ball extends PhysicsElement {
         speed.x = next_speed.x;
         updateForces();
     }
+    
+    public void attachSpring(Spring s){
+		//insertar codigo
+	}
+    
+    public Vector getPos() {
+        return position;
+    }
+    
 }
