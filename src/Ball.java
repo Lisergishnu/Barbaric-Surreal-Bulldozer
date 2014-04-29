@@ -104,9 +104,20 @@ public class Ball extends PhysicsElement implements SpringAttachable{
         updateForces();
     }
     
-    public void attachSpring(Spring s){
-		//insertar codigo
-	}
+    //**************************************
+    // METODOS OBLIGADOS POR INTERFACE
+    //**************************************
+    public void addExternalForce(Vector extF) {
+        externalForces.add(extF);
+    }
+    
+    public void removeExternalForce(Vector extF) {
+        externalForces.remove(extF);
+    }
+
+    public void attachSpring(Spring spring) {
+        attachedSpring = spring;
+    }
     
     public Vector getPos() {
         return position;

@@ -1,4 +1,11 @@
 interface SpringAttachable {
-  void attachSpring(Spring s);
-  Vector getPos();
+  
+	void attachSpring(Spring s);
+  
+	Vector getPos();
+  
+	public void addExternalForce(Vector extF);  
+  
+	public void removeExternalForce(Vector extF);
+	
 }

@@ -40,12 +40,24 @@ public class FixedHook extends PhysicsElement implements SpringAttachable{
     	return df.format(position.x);
     }
     
-	public Vector getPos() {
-	    return position;
-	}
-	
-	public void attachSpring(Spring s){
-		//insertar codigo
-	}
+    //**************************************
+    // METODOS OBLIGADOS POR INTERFACE
+    //**************************************
+    public void addExternalForce(Vector extF) {
+        externalForces.add(extF);
+    }
+    
+    public void removeExternalForce(Vector extF) {
+        externalForces.remove(extF);
+    }
+
+    public void attachSpring(Spring spring) {
+        attachedSpring = spring;
+    }
+    
+    public Vector getPos() {
+        return position;
+    }
+    
 	
 }

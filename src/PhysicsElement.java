@@ -33,10 +33,16 @@ public abstract class PhysicsElement {
     public abstract String getDescription();
     public abstract String getState();
 
+
+
+    /*
+     * comentado debido a implementacion de interface
+     * 
+     * 
     public Vector getPos() {
         return position;
     }
-
+    
     public void addExternalForce(Vector extF) {
         externalForces.add(extF);
     }
@@ -48,4 +54,5 @@ public abstract class PhysicsElement {
     public void attachSpring(Spring spring) {
         attachedSpring = spring;
     }
+    */
 }

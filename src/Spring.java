@@ -6,7 +6,8 @@ public class Spring extends PhysicsElement {
     private final double stiffness;
     
     protected final double restLength;
-    private PhysicsElement a_end, b_end;
+    //private PhysicsElement a_end, b_end;
+    private SpringAttachable a_end, b_end;
 
     private Vector a_force;
     private Vector b_force;
@@ -46,7 +47,7 @@ public class Spring extends PhysicsElement {
     //*************************
     // METODOS PUBLICOS
     //*************************
-    public void attachEnd (PhysicsElement sa) {
+    public void attachEnd (SpringAttachable sa) {
     	/*Se agregan las bolas en los extremos y se les agrega la externalForce correspondiente a la 
     	 * fuerza ejercida por el resorte*/
         if(a_end == null){
