@@ -30,42 +30,46 @@ public class PhysicsLab {
             samplingTime = Double.parseDouble(args[2]); // [s]
         }
 
-      if (deltaTime == 0 || endTime == 0 || samplingTime == 0) {
+        if (deltaTime == 0 || endTime == 0 || samplingTime == 0) {
         //Ningun argumento puede ser cero
-        System.out.println("Neither argument can be zero");
-        System.exit(-1);
-      }
-      
-      File outputFile = new File("res/output.txt");
-      if (!outputFile.exists()) {
-        try {
-          outputFile.getParentFile().mkdirs(); //Crear Directorio
-          outputFile.createNewFile();
-        } catch (IOException e) {
-          System.err.println("Couldn't make file: " + e.getMessage());
-          return; //Terminar programa
+            System.out.println("Neither argument can be zero");
+            System.exit(-1);
         }
-      }
-      PrintStream writer = new PrintStream(outputFile);
-      
-        MyWorld world = new MyWorld(System.out);
 
-        double mass = 1.0;      // 1 [kg]
-        double radius = 0.1;    // 10 [cm]
-        double position = 1.0;  // 1 [m]
-        double speed = 0.2;     // 0.5 [m/s]
-        //Ball b0 = new Ball(mass, radius, position, speed);
-        Ball b1 = new Ball(mass, radius, 2.56, 0);
-        Spring s0 = new Spring(1, 1);
-        FixedHook f0 = new FixedHook(1, 0, 0);
-        //world.addElement(b0);
-        world.addElement(b1);
-        world.addElement(s0);
-        world.addElement(f0);
-        s0.attachEnd(f0);
-        s0.attachEnd(b1);
-        world.simulate(deltaTime, endTime, samplingTime); // delta time[s], total simulation time [s].
+        File outputFile = new File("res/output.csv");
+        if (!outputFile.exists()) {
+            try {
+	          outputFile.getParentFile().mkdirs(); //Crear Directorio
+	          outputFile.createNewFile();
+	      } catch (IOException e) {
+	          System.err.println("Couldn't make file: " + e.getMessage());
+	          return; //Terminar programa
+	      }
+	    }
 
-        writer.close();
+		PrintStream writer = new PrintStream(outputFile);
+		MyWorld world = new MyWorld(System.out,writer);
+
+		double mass = 1.0;      // 1 [kg]
+		double radius = 0.1;    // 10 [cm]
+		double position = 1.0;  // 1 [m]
+		double speed = 0.2;     // 0.5 [m/s]
+		//Ball b0 = new Ball(mass, radius, position, speed);
+		Ball b1 = new Ball(mass, radius, 2.56, 0);
+		Spring s0 = new Spring(1, 1);
+		FixedHook f0 = new FixedHook(1, 0, 0);
+		//world.addElement(b0);
+		world.addElement(b1);
+		world.addElement(s0);
+		world.addElement(f0);
+		s0.attachEnd(f0);
+		s0.attachEnd(b1);
+
+		//Medimos el tiempo de ejecucion de la simulación.
+		long startTime = System.nanoTime();
+		world.simulate(deltaTime, endTime, samplingTime); // delta time[s], total simulation time [s].
+		float elapsedTime = (System.nanoTime() - startTime) / (float)Math.pow(10,9);
+		System.out.println("Simulation ended in "+ elapsedTime + " [s] and was written to res/output.csv.");
+		writer.close();
     }
 }

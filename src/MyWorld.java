@@ -7,7 +7,8 @@ public class MyWorld {
     // VARIABLES
     //***********
     private final double COLLISION_THRESHOLD = 0.05;
-    private PrintStream out;
+    private PrintStream outMain;
+    private PrintStream outSecondary;
     
     protected DecimalFormat df = new DecimalFormat("#.##");
     
@@ -22,8 +23,15 @@ public class MyWorld {
     public MyWorld() {
         this(System.out);// delta_t= 0.1[ms] and refreshPeriod=200 [ms]
     }
+    public MyWorld(PrintStream outputToConsole, PrintStream outputToFile) {
+        outMain = outputToConsole;
+        outSecondary = outputToFile;
+        elements = new ArrayList<PhysicsElement>();
+        balls = new ArrayList<Ball>();
+    }
     public MyWorld(PrintStream output) {
-        out = output;
+        outMain = output;
+        outSecondary = null;
         elements = new ArrayList<PhysicsElement>();
         balls = new ArrayList<Ball>();
     }
@@ -48,14 +56,20 @@ public class MyWorld {
         String s ="Time\t";
         for (PhysicsElement e:elements)
             s+=e.getDescription() + "\t";
-        out.println(s);
+        outMain.println(s);
+        if (outSecondary != null) {
+            outSecondary.println(s);
+        }
     }
 
     public void printState(double t) {
         String s = "" + df.format(t);
         for (PhysicsElement e:elements)
             s+="\t" + e.getState();
-        out.println(s);
+        outMain.println(s);
+        if (outSecondary != null) {
+            outSecondary.println(s);
+        }
     }
 
     public void simulate (double delta_t, double endTime, double samplingTime) { // simulate passing time
