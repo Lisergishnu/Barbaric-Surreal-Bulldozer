@@ -1,0 +1,7 @@
+build/
+src/*.class
+<<<<<<< HEAD
+res/
+=======
+/bin
+>>>>>>> Yuyo
