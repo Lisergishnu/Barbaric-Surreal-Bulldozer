@@ -1,12 +1,12 @@
-import java.util.*;
 
-public class Ball extends PhysicsElement implements SpringAttachable{
+public class Block extends PhysicsElement implements SpringAttachable, Collisionable{
+
     //***********
     // VARIABLES
     //***********
     private static int id=0;
     private final double mass;
-    private final double radius;
+    private final double side;
     private double delta;
 
     //Variables Fisicas
@@ -17,7 +17,7 @@ public class Ball extends PhysicsElement implements SpringAttachable{
     private Vector next_position;
     
     private boolean collision;
-
+    
     {
         /*Inicialización de Variables*/
         position = new Vector();
@@ -27,25 +27,28 @@ public class Ball extends PhysicsElement implements SpringAttachable{
         next_speed = new Vector();
         next_position = new Vector();
     }
-
+    
     //**************
     // CONSTRUCTORES
     //**************
-    private Ball() {
-        this(1.0,0.1,0,0);
+    private Block() {
+        this(1.0,0.2,0,0);
     }
 
-    public Ball(double mass, double radius, double pos, double spd) {
+    public Block(double mass, double side, double pos, double spd) {
         super(id++);
         this.mass = mass;
-        this.radius = radius;
+        this.side = side;
         position.x = pos;
         speed.x = spd;
     }
-
+	
     //*************************
     // METODOS PRIVADOS
     //*************************
+    
+    private void 
+    
     private void updateForces() {
         internalForce.x = 0;
         externalForce.zerify();
@@ -54,40 +57,17 @@ public class Ball extends PhysicsElement implements SpringAttachable{
             externalForce.add(x);
         }
     }
-
-    //*************************
-    // METODOS PUBLICOS
-    //*************************
-    public double getRadius() {
-        return radius;
-    }
-
-    public double getMass() {
-        return mass;
-    }
-
-    public Vector getSpeed() {
-        return speed;
-    }
-
-    public Vector getNextPos() {
-        return Vector.add(position, speed.times(delta));
-    }
-
-    public String getState() {
-        return df.format(position.x) + "\t" + df.format(speed.x) + "\t" + df.format(externalForce.x);
-    }
-
-    public String getDescription() {
-        return "b" + getId() + "pos\tb" + getId() + "spd\t" + "eF";
-    }
     
+    //**************************************
+    // METODOS OBLIGADOS POR HERENCIA
+    //**************************************
+	
     public void computeNextState(double delta_t, MyWorld world) {
-        Ball b;
+        Collisionable b;
         //Variable delta_t local, para usar en otras funciones
         delta = delta_t;
         if ((b=world.findCollidingObject(this))!= null) {
-            next_speed.x=(speed.x*(mass-b.getMass())+2*b.getMass()*b.getSpeed().x)/(mass+b.getMass());
+            next_speed.x=/*insertar codigo*/;
             next_position.x = position.x;
             collision = true;
         } else {
@@ -96,16 +76,29 @@ public class Ball extends PhysicsElement implements SpringAttachable{
             collision = false;
         }
     }
-
-    public void updateState() {
+    public void updateState(){
         position.x = next_position.x;
         acceleration.x = (next_speed.x - speed.x)/delta;
         speed.x = next_speed.x;
         updateForces();
     }
+
+    public String getDescription(){//revisar
+    	return "b" + getId() + "pos\tb" + getId() + "spd\t" + "eF";
+    }
+    public String getState(){//revisar
+        return df.format(position.x) + "\t" + df.format(speed.x) + "\t" + df.format(externalForce.x);
+    }
+    
     
     //**************************************
-    // METODOS OBLIGADOS POR INTERFACE
+    // METODOS OBLIGADOS POR INTERFACE Collisionable
+    //***********************************
+    
+    
+    
+    //**************************************
+    // METODOS OBLIGADOS POR INTERFACE SpringAttachable
     //**************************************
     public void addExternalForce(Vector extF) {
         externalForces.add(extF);
@@ -122,5 +115,5 @@ public class Ball extends PhysicsElement implements SpringAttachable{
     public Vector getPos() {
         return position;
     }
-    
+	
 }

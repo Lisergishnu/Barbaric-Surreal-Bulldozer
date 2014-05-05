@@ -73,7 +73,7 @@ public class MyWorld {
         }
     }
 
-    public Ball findCollidingBall(Ball me) {
+    public Ball findCollidingObject(Ball me) {
         Ball collider_ball = null;
         // Busco la primera bola que entre en contacto con "me"
         for(Ball x : balls) {
