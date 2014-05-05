@@ -2,3 +2,4 @@ build/
 src/*.class
 res/
 bin/
+.metadata
