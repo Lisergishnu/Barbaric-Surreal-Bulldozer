@@ -25,4 +25,4 @@ Alternativamente **(Metodo necesario para las etapas)**
 
 	$ make
 	$ cd bin/
-	$ java PhysicsLab java PhysicsLab 0.0001 20 0.1 > ../res/output.csv
+	$ java PhysicsLab 0.0001 20 0.1 > ../res/output.csv
