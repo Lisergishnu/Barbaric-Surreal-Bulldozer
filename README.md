@@ -10,6 +10,7 @@ Observaciones
 -------------
 
 - La aplicación genera una tabla separada por *tabs*. A pesar de ésto, se usa por convención la descripción CSV para ésta.
+- Para la versión por etapas, se debe correr el programa desde la carpeta bin/. Esto es por que hacia el final del desarrollo de la tarea se implementó mejor la canalización de los *PrintStream*.
 - El programa tiene un modo interactivo: para acceder a él basta con ejecutar el programa sin argumentos.
 	- En este modo el programa entrega la simulacion por pantalla pero también la escribe a un archivo CSV (por defecto, 'res/output.csv').
 	- La motivación es que hacer una redireción directa de la salida desde este modo trae inconsistencias con el formato CSV por la información desplegada en la consola previa a la simulación.
@@ -19,10 +20,12 @@ Observaciones
 Compilando y corriendo
 --------------------
 
-	$ make && make run
-
-Alternativamente **(Metodo necesario para las etapas)** 
+**(Metodo necesario para las etapas)**
 
 	$ make
 	$ cd bin/
 	$ java PhysicsLab 0.0001 20 0.1 > ../res/output.csv
+
+Alternativamente  
+
+	$ make && make run
