@@ -54,15 +54,15 @@ public class PhysicsLab {
 		double radius = 0.1;    // 10 [cm]
 		double position = 1.0;  // 1 [m]
 		double speed = 0.2;     // 0.5 [m/s]
-		Ball b0 = new Ball(mass, radius, 0, 0);
-		Ball b1 = new Ball(mass, radius, 1.5, 0);
+		//Ball b0 = new Ball(mass, radius, 0, 0);
+		Ball b1 = new Ball(mass, radius, 1.5, 1);
 		Spring s0 = new Spring(1, 1);
-		//FixedHook f0 = new FixedHook(1, 0, 0);
-		world.addElement(b0);
+		FixedHook f0 = new FixedHook(0, 0, 0);
+		//world.addElement(b0);
 		world.addElement(b1);
 		world.addElement(s0);
-		//world.addElement(f0);
-		s0.attachEnd(b0);
+		world.addElement(f0);
+		s0.attachEnd(f0);
 		s0.attachEnd(b1);
 
 		//Medimos el tiempo de ejecucion de la simulación.
