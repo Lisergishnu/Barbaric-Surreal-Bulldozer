@@ -21,8 +21,8 @@ Compilando y corriendo
 
 	$ make && make run
 
-#Alternativamente
+Alternativamente **(Metodo necesario para las etapas)** 
 
 	$ make
 	$ cd bin/
-	$ java PhysicsLab [Argumentos]
+	$ java PhysicsLab java PhysicsLab 0.0001 20 0.1 > ../res/output.csv
